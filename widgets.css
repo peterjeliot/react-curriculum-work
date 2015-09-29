@@ -2,3 +2,17 @@
   float: left;
   padding: 20px;
 }
+
+#tabs {
+  clear: left;
+}
+.header {
+  float: left;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.tab-content {
+  clear: left;
+  display: block;
+}

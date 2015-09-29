@@ -105,4 +105,44 @@ var WeatherClock = React.createClass({
 React.render(
   <WeatherClock />,
   document.getElementById("weather")
-)
+);
+
+var Tabs = React.createClass({
+  getInitialState: function() {
+    return {
+      activeTab: this.props.tabs[0]
+    };
+  },
+  render: function () {
+    var self = this;
+    return (
+      <div>
+        {
+          this.props.tabs.map(function (tab) {
+            return <Header title={tab.title} onClick={self.handleClick.bind(self, tab)} />
+          })
+        }
+        <div className={"tab-content"}>
+          { this.state.activeTab.content }
+        </div>
+      </div>
+    );
+  },
+  handleClick: function(tab) {
+    this.setState({ activeTab: tab });
+  }
+});
+
+var Header = React.createClass({
+  render: function () {
+    return (
+      <div className={"header"} onClick={this.props.onClick}>{this.props.title}</div>
+    );
+  }
+});
+
+React.render(
+  <Tabs tabs={[{title: "Main", content: "Stuff and things"}, {title: "Hotdogs", content: "Bun, ketchup, mystery meat"}]}>
+  </Tabs>,
+  document.getElementById("tabs")
+);
