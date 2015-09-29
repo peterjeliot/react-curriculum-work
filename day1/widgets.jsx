@@ -22,7 +22,7 @@ var Autocomplete = React.createClass({
       <input type="text" value={this.state.userInput} onChange={this.handleChange}></input>
       <ul>
         { this.state.filteredNames.map(function(name, index){
-          return <li onClick={self.handleClick.bind(self, name)}>{name}</li>
+          return <li key={index} onClick={self.handleClick.bind(self, name)}>{name}</li>
         }) }
       </ul>
     </div>;
@@ -43,7 +43,7 @@ var Clock = React.createClass({
   render: function () {
     var date = this.state.date;
     return (
-      <div class="clock">
+      <div className="clock">
         <p>{date.toLocaleTimeString('en-US')}</p>
       </div>
     );
@@ -83,10 +83,12 @@ var Weather = React.createClass({
   render: function () {
     var temperature = this.state.weather_xml.main.temp;
     var weather = this.state.weather_xml.weather[0].main;
-    return <div class="weather">
-      <div>Weather: {weather}</div>
-      <div>Temperature: {temperature}</div>
+    return (
+      <div className="weather">
+        <div>Weather: {weather}</div>
+        <div>Temperature: {temperature}°F</div>
       </div>
+    )
   }
 
 });
@@ -94,7 +96,7 @@ var Weather = React.createClass({
 var WeatherClock = React.createClass({
   render: function() {
     return (
-      <div class="weather-clock">
+      <div className="weather-clock">
         <Weather/>
         <Clock/>
       </div>
