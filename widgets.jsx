@@ -110,39 +110,49 @@ React.render(
 var Tabs = React.createClass({
   getInitialState: function() {
     return {
-      activeTab: this.props.tabs[0]
+      activeTab: this.props.children[0]
     };
   },
   render: function () {
     var self = this;
+    self.props.children.forEach(function (child) {
+      child.props.onClick = self.handleClick.bind(self,child);
+    })
     return (
       <div>
         {
-          this.props.tabs.map(function (tab) {
-            return <Header title={tab.title} onClick={self.handleClick.bind(self, tab)} />
-          })
+          self.props.children
         }
-        <div className={"tab-content"}>
-          { this.state.activeTab.content }
+        <div className="tab-content">
+          { this.state.activeTab.props.children }
         </div>
       </div>
     );
   },
   handleClick: function(tab) {
     this.setState({ activeTab: tab });
-  }
+  },
 });
 
-var Header = React.createClass({
+var Tab = React.createClass({
   render: function () {
     return (
       <div className={"header"} onClick={this.props.onClick}>{this.props.title}</div>
     );
-  }
+  },
 });
 
 React.render(
-  <Tabs tabs={[{title: "Main", content: "Stuff and things"}, {title: "Hotdogs", content: "Bun, ketchup, mystery meat"}]}>
+  <Tabs>
+    <Tab title="Main">
+      Stuff and things
+    </Tab>
+    <Tab title="Hotdogs">
+      Ketchup, mustard, mystery meat
+    </Tab>
+    <Tab title="Evil hotdogs">
+      Pain, suffering, 100% real beef
+    </Tab>
   </Tabs>,
   document.getElementById("tabs")
 );
