@@ -31,8 +31,7 @@ var Autocomplete = React.createClass({
   }
 });
 
-
 React.render(
   <Autocomplete names={["melanie", "peter", "lahwran", "trevor", "jesus christ", "valentine", "sarah", "dee", "emily"]}/>,
-  document.getElementById("content")
+  document.getElementById("autocomplete")
 );
