@@ -15,6 +15,7 @@ var TodoList = React.createClass({
     return (
       <div>
         <h2>Todos</h2>
+        <TodoForm/>
         {
           this.state.todos.map(function (todo) {
             return <TodoListItem title={todo.title} body={todo.body}/>
