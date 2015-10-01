@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: "static_pages#root"
   get "api/todos/", to: "todos#index"
   get "api/todos/:id", to: "todos#show"
   post "api/todos/", to: "todos#create"
