@@ -17,7 +17,7 @@ var TodoList = React.createClass({
         <h2>Todos</h2>
         {
           this.state.todos.map(function (todo) {
-            return <li>{todo.title}</li>
+            return <TodoListItem title={todo.title} body={todo.body}/>
           })
         }
       </div>
@@ -25,9 +25,20 @@ var TodoList = React.createClass({
   },
 });
 
+var TodoListItem = React.createClass({
+  render: function () {
+    return (
+      <div>
+        <div>{this.props.title}</div>
+        <div>{this.props.body}</div>
+      </div>
+    );
+  },
+});
+
 $(function(){
   React.render(
-  <TodoList/>,
-  document.getElementById('todo-list')
-)
+    <TodoList/>,
+    document.getElementById('todo-list')
+  )
 })
