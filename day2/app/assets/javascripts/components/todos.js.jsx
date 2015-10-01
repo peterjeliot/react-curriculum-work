@@ -4,12 +4,20 @@ var TodoList = React.createClass({
       todos: Todos.all()
     };
   },
+  todosChanged: function () {
+    this.setState({ todos: Todos.all() });
+  },
+  componentDidMount: function () {
+    Todos.addChangedHandler(this.todosChanged);
+    Todos.fetch();
+  },
   render: function () {
     return (
       <div>
+        <h2>Todos</h2>
         {
           this.state.todos.map(function (todo) {
-            <li>{todo.title}</li>
+            return <li>{todo.title}</li>
           })
         }
       </div>
@@ -17,7 +25,9 @@ var TodoList = React.createClass({
   },
 });
 
-React.render(
+$(function(){
+  React.render(
   <TodoList/>,
-  document.body
+  document.getElementById('todo-list')
 )
+})

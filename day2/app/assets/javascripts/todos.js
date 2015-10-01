@@ -84,7 +84,7 @@
       _callbacks.forEach(function(callback) {callback();});
     },
     addChangedHandler: function(handler) {
-      _callbacks.append(handler)
+      _callbacks.push(handler)
     },
     removeChangedHandler: function(handler) {
       var index = _callbacks.indexOf(handler)
