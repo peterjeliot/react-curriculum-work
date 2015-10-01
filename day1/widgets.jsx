@@ -29,10 +29,10 @@ var Autocomplete = React.createClass({
   }
 });
 
-React.render(
-  <Autocomplete names={["melanie", "peter", "lahwran", "trevor", "jesus christ", "valentine", "sarah", "dee", "emily"]}/>,
-  document.getElementById("autocomplete")
-);
+// React.render(
+//   <Autocomplete names={["melanie", "peter", "lahwran", "trevor", "jesus christ", "valentine", "sarah", "dee", "emily"]}/>,
+//   document.getElementById("autocomplete")
+// );
 
 var Clock = React.createClass({
   getInitialState: function() {
@@ -104,10 +104,10 @@ var WeatherClock = React.createClass({
   }
 })
 
-React.render(
-  <WeatherClock />,
-  document.getElementById("weather")
-);
+// React.render(
+//   <WeatherClock />,
+//   document.getElementById("weather")
+// );
 
 var Tabs = React.createClass({
   getInitialState: function() {
@@ -146,15 +146,12 @@ var Tab = React.createClass({
 
 React.render(
   <Tabs>
-    <Tab title="Main">
-      Stuff and things
+    <Tab title="Autocomplete">
+      <Autocomplete names={["melanie", "peter", "lahwran", "trevor", "jesus christ", "valentine", "sarah", "dee", "emily"]}/>
     </Tab>
-    <Tab title="Hotdogs">
-      Ketchup, mustard, mystery meat
-    </Tab>
-    <Tab title="Evil hotdogs">
-      Pain, suffering, 100% real beef
+    <Tab title="Weather">
+      <WeatherClock/>
     </Tab>
   </Tabs>,
   document.getElementById("tabs")
-);
+)
