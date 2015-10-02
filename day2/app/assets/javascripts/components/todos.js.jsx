@@ -27,17 +27,12 @@ var TodoList = React.createClass({
 });
 
 var TodoListItem = React.createClass({
-  handleDestroy: function() {
-    Todos.destroy(this.props.todo.id);
-  },
   render: function () {
     var todo = this.props.todo;
     return (
       <div className="todo-item">
-        <div className="todo-delete"
-             onClick={ this.handleDestroy }>x</div>
-           <div className="todo-title">{todo.title}</div>
-        <div className="todo-body">{todo.body}</div>
+        <div className="todo-title">{todo.title}</div>
+        <TodoDetailView todo={todo}/>
         <DoneButton done={todo.done} id={todo.id}/>
       </div>
     );
