@@ -18,7 +18,7 @@ var TodoList = React.createClass({
         <TodoForm/>
         {
           this.state.todos.map(function (todo) {
-            return <TodoListItem title={todo.title} body={todo.body} id={todo.id}/>
+            return <TodoListItem todo={todo}/>
           })
         }
       </div>
@@ -27,16 +27,18 @@ var TodoList = React.createClass({
 });
 
 var TodoListItem = React.createClass({
-  handleDestroy: function(id) {
-    Todos.destroy(id)
+  handleDestroy: function() {
+    Todos.destroy(this.props.todo.id);
   },
   render: function () {
+    var todo = this.props.todo;
     return (
       <div className="todo-item">
         <div className="todo-delete"
-             onClick={ this.handleDestroy.bind(this,this.props.id) }>x</div>
-           <div className="todo-title">{this.props.title}</div>
-        <div className="todo-body">{this.props.body}</div>
+             onClick={ this.handleDestroy }>x</div>
+           <div className="todo-title">{todo.title}</div>
+        <div className="todo-body">{todo.body}</div>
+        <DoneButton done={todo.done} id={todo.id}/>
       </div>
     );
   },
