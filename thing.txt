@@ -1,0 +1,5 @@
+React app for nominating movie night movies
+
+Name input for votes
+Add movies to list
+Upvote movies (with name attached to vote)
