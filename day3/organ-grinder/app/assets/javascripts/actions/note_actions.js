@@ -1,14 +1,14 @@
 var NoteActions = {
-  keyPressed: function (note) {
+  keyPressed: function (noteName) {
     AppDispatcher.dispatch({
       actionType: "PLAY_NOTE",
-      note: note
+      noteName: noteName
     })
   },
-  keyReleased: function (note) {
+  keyReleased: function (noteName) {
     AppDispatcher.dispatch({
       actionType: "STOP_NOTE",
-      note: note
+      noteName: noteName
     })
   },
 }
