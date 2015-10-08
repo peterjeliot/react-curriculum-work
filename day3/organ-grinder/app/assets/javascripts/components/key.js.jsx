@@ -12,16 +12,20 @@ var Key = React.createClass({
   },
   render: function () {
     return (
-      <div>{ this.props.noteName }</div>
+      <div onMouseDown={this.handleMouseDown}
+           onMouseUp={this.handleMouseUp}
+           onMouseLeave={this.handleMouseUp}>
+        { this.props.noteName }</div>
     );
   },
   handleMouseDown: function(event) {
-    if (String.fromCharCode(event.keyCode) === this.props.keyboardKey){
+    if ((event.type === "mousedown") || (String.fromCharCode(event.keyCode) === this.props.keyboardKey)){
       NoteActions.keyPressed(this.props.noteName);
     }
   },
   handleMouseUp: function(event) {
-    if (String.fromCharCode(event.keyCode) === this.props.keyboardKey){
+    if (((event.type === "mouseup") || (event.type === "mouseleave")) ||
+    String.fromCharCode(event.keyCode) === this.props.keyboardKey){
       NoteActions.keyReleased(this.props.noteName);
     }
   },
