@@ -37,16 +37,3 @@ var Key = React.createClass({
     }
   }
 });
-
-$(function () {
-  React.render(
-    <div>
-      {
-        Object.keys(TONES).map(function (key) {
-          return <Key key={key} keyboardKey={KEYBINDS[key]} noteName={key}/>
-        })
-      }
-    </div>,
-    document.getElementById("content")
-  )
-})
