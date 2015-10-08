@@ -1,4 +1,9 @@
 var Key = React.createClass({
+  getInitialState: function() {
+    return {
+      playing: false
+    };
+  },
   componentDidMount: function() {
     this.note = new Note(TONES[this.props.noteName]);
     KeyStore.on("change", this.handleChange);
@@ -12,13 +17,15 @@ var Key = React.createClass({
   },
   render: function () {
     return (
-      <div onMouseDown={this.handleMouseDown}
+      <div className={this.state.playing ? "organ-key playing" : "organ-key"}
+           onMouseDown={this.handleMouseDown}
            onMouseUp={this.handleMouseUp}
            onMouseLeave={this.handleMouseUp}>
         { this.props.noteName }</div>
     );
   },
   handleMouseDown: function(event) {
+    event.preventDefault();
     if ((event.type === "mousedown") || (String.fromCharCode(event.keyCode) === this.props.keyboardKey)){
       NoteActions.keyPressed(this.props.noteName);
     }
@@ -31,8 +38,10 @@ var Key = React.createClass({
   },
   handleChange: function () {
     if (KeyStore.all()[this.props.noteName]) {
+      this.setState({playing: true})
       this.note.start()
     } else {
+      this.setState({playing: false})
       this.note.stop()
     }
   }
