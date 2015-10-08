@@ -1,20 +1,17 @@
 
 (function(root) {
-  var _data = []
+  var _data = {};
   var KeyStore = root.KeyStore = $.extend({}, EventEmitter.prototype, {
     all: function () {
-      return _data.slice();
+      return $.extend({}, _data);
     },
     playNote: function(noteName) {
-      _data.push(noteName);
+      _data[noteName] = true;
       this.emit("change");
     },
     stopNote: function(noteName) {
-      var index = _data.indexOf(noteName);
-      if (index > -1){
-        _data.splice(index,1)
-        this.emit("change");
-      };
+      _data[noteName] = false;
+      this.emit("change");
     }
   });
 

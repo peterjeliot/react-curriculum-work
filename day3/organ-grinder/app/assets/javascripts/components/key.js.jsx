@@ -2,8 +2,8 @@ var Key = React.createClass({
   componentDidMount: function() {
     this.note = new Note(TONES[this.props.noteName]);
     KeyStore.on("change", this.handleChange);
-    $(document).keydown("a",this.handleMouseDown);
-    $(document).keyup("a",this.handleMouseUp);
+    $(document).keydown(this.handleMouseDown);
+    $(document).keyup(this.handleMouseUp);
   },
   componentWillUnmount: function() {
     KeyStore.removeListener("change", this.handleChange);
@@ -12,18 +12,21 @@ var Key = React.createClass({
   },
   render: function () {
     return (
-      <div onMouseDown={ this.handleMouseDown }
-        onMouseUp={ this.handleMouseUp }>{ this.props.noteName }</div>
+      <div>{ this.props.noteName }</div>
     );
   },
-  handleMouseDown: function() {
-    NoteActions.keyPressed(this.props.noteName);
+  handleMouseDown: function(event) {
+    if (String.fromCharCode(event.keyCode) === this.props.keyboardKey){
+      NoteActions.keyPressed(this.props.noteName);
+    }
   },
-  handleMouseUp: function() {
-    NoteActions.keyReleased(this.props.noteName);
+  handleMouseUp: function(event) {
+    if (String.fromCharCode(event.keyCode) === this.props.keyboardKey){
+      NoteActions.keyReleased(this.props.noteName);
+    }
   },
   handleChange: function () {
-    if (KeyStore.all().indexOf(this.props.noteName) > -1) {
+    if (KeyStore.all()[this.props.noteName]) {
       this.note.start()
     } else {
       this.note.stop()
@@ -36,7 +39,7 @@ $(function () {
     <div>
       {
         Object.keys(TONES).map(function (key) {
-          return <Key key={key} noteName={key}/>
+          return <Key key={key} keyboardKey={KEYBINDS[key]} noteName={key}/>
         })
       }
     </div>,
