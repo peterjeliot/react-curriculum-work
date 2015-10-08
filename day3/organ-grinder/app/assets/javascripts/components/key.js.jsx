@@ -25,8 +25,8 @@ var Key = React.createClass({
     );
   },
   handleMouseDown: function(event) {
-    event.preventDefault();
     if ((event.type === "mousedown") || (String.fromCharCode(event.keyCode) === this.props.keyboardKey)){
+      event.preventDefault();
       NoteActions.keyPressed(this.props.noteName);
     }
   },
