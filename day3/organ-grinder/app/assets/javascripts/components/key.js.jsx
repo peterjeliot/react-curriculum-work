@@ -16,12 +16,20 @@ var Key = React.createClass({
     this.note.stop();
   },
   render: function () {
+    var className = "organ-key";
+    if(this.state.playing) {
+      className += " playing"
+    }
+    if(this.props.noteName.indexOf("#") > -1){ //TODO: This is fragile
+      className += " organ-key-black"
+    }
     return (
-      <div className={this.state.playing ? "organ-key playing" : "organ-key"}
+      <div className={className}
            onMouseDown={this.handleMouseDown}
            onMouseUp={this.handleMouseUp}
            onMouseLeave={this.handleMouseUp}>
-        { this.props.noteName }</div>
+        <div className="note-name">{ this.props.noteName }</div>
+      </div>
     );
   },
   handleMouseDown: function(event) {
