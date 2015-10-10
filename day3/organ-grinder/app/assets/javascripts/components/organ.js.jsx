@@ -8,6 +8,14 @@ var Organ = React.createClass({
             return <Key key={key} keyboardKey={self.props.keyBinds[key]} noteName={key}/>
           })
         }
+        <div>
+          {
+            Object.keys(CHORDS).map(function (chordName) {
+              var notes = CHORDS[chordName];
+              return <Chord chordName={chordName} noteNames={notes}/>
+            })
+          }
+        </div>
       </div>
     )
   }
