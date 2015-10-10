@@ -45,7 +45,7 @@ var Key = React.createClass({
     }
   },
   handleChange: function () {
-    if (KeyStore.all()[this.props.noteName]) {
+    if (KeyStore.contains(this.props.noteName)) {
       this.setState({playing: true})
       this.note.start()
     } else {

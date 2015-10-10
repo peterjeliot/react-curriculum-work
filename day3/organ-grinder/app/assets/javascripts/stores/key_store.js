@@ -1,18 +1,25 @@
-
 (function(root) {
-  var _data = {};
+  var _data = [];
   var KeyStore = root.KeyStore = $.extend({}, EventEmitter.prototype, {
     all: function () {
-      return $.extend({}, _data);
+      return _data.slice();
     },
     playNote: function(noteName) {
-      _data[noteName] = true;
-      this.emit("change");
+      if (_data.indexOf(noteName) < 0){
+        _data.push(noteName);
+        this.emit("change");
+      }
     },
     stopNote: function(noteName) {
-      _data[noteName] = false;
-      this.emit("change");
-    }
+      var index = _data.indexOf(noteName)
+      if (index > -1){
+        _data.splice(index,1);
+        this.emit("change");
+      }
+    },
+    contains: function(noteName) {
+      return _data.indexOf(noteName) > -1
+    },
   });
 
   KeyStore.dispatcherID = AppDispatcher.register(function (noteAction) {
@@ -26,4 +33,5 @@
     }
   })
 
+  KeyStore.setMaxListeners(40);
 })(this);

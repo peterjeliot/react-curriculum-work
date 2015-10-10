@@ -38,9 +38,8 @@ var Chord = React.createClass({
     });
   },
   handleChange: function () {
-    var keyStore = KeyStore.all();
     if (this.props.noteNames.every(function (noteName) {
-      return keyStore[noteName]
+      return KeyStore.contains(noteName)
     })) {
       this.setState({ playing: true });
     } else {
